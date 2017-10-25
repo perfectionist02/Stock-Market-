@@ -4,25 +4,20 @@
     <title>Stock Market</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    {% load static %}
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/bootstrap-social.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/mystyles.css" rel="stylesheet">
-     <link rel="stylesheet" href="css/style.css">
-
+    <link href={% static "css/bootstrap.min.css" %} rel="stylesheet">
+    <link href={% static "css/font-awesome.min.css" %} rel="stylesheet">
+    <link href={% static "css/bootstrap-social.css" %} rel="stylesheet">
+    <link href={% static "css/bootstrap-theme.min.css" %} rel="stylesheet">
+    <link href={% static "css/mystyles.css" %} rel="stylesheet">
+    <link href={% static "css/vision.css" %} rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src={% static "js/bootstrap.min.js" %}></script>
+         <link  href={% static "css/display.css" %} rel="stylesheet">
 
 </head>
 <body>
-<!--
-<div class="scroll-top-wrapper ">
-    <span class="scroll-top-inner">
-        <i class="fa fa-2x fa-arrow-circle-up"></i>
-    </span>
-</div> -->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -33,56 +28,70 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#"><img src="pics/adbms/7.png" style="height: 50px; width: 50px; top: 0px; left: 50px"></a>
+            <a href="#"><img src={% static "pics/adbms/7.png" %} style="height: 50px; width: 50px; top: 0px; left: 130px"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav" style="font-family: sans-serif; font-size: medium">
-                <li><a href="main.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
-                <li><a href="stock1.html"><i class="fa fa-check"></i>&nbsp;Stocks</a></li>
+                <li><a href="../homepage/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+                <li><a href="../stocks/"><i class="fa fa-check"></i>&nbsp;Stocks</a></li>
+               {% if user.is_authenticated %}
+                <li class="active"><a href="../portfolio/"><i class="fa fa-check"></i>&nbsp;Portfolio</a></li>
+                <li><a href="../transact/"><i class="fa fa-check"></i>&nbsp;Buy/Sell</a></li>
+               {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right" style="font-family: sans-serif; font-size: medium">
-                <li><a class="button" href="register.html"><i class="fa fa-sign-in"></i>&nbsp;Register</a></li>
-                <li class="active"><a class="button" href="login.html"><i class="fa fa-sign-in"></i>&nbsp;Login</a></li>
+            {% if user.is_authenticated %}
+                
+                <li><a class="button" href="../logout/"><i class="fa fa-sign-in"></i>&nbsp;Logout</a></li>
+            {% else %}
+                <li><a class="button" href="../register/"><i class="fa fa-sign-in"></i>&nbsp;Register</a></li>
+                <li><a class="button" href="../login/"><i class="fa fa-sign-in"></i>&nbsp;Login</a></li>
+
+            {% endif %}
             </ul>
 
         </div>
     </div>
-    </nav>
-
-
-    <div id="wrapper">
-            <h1>Stock Holder?</h1>
-            <form id="form">
-                <fieldset>
-                    <br>
-                    <div class="control">
-                        <label for="uname" class="label1">UserName *</label>
-                        <input type="text" name="uname" id="uname" class="required">
-                    </div>
-                    <div class="control">
-                        <label for="password" class="label1">Password *</label>
-                        <input type="password" name="password" id="password" class="required">
-                    </div>
-                    <div>
-                        <input type="submit" id="submit" value="LOGIN">
-                        <input type="reset" id="reset" value="CLEAR">
-                    </div>
-                    <br><br>
-                    <input type="checkbox"> Remember Me<br><br>
-                    <a href="#">Forgot Password?</a><br><br>
-                
-                </form>
-            </div>            
-            </fieldset>
-            </form>
+</nav>
+    <div class="film" id="p3">
 </div>
+<div class="line"></div>
+    <div class="container-fluid">
+        <br><br>
+        <caption><b><h3>Balance:</h3></b></caption>
+        <h3>{{balance}}</h3>
+    </div>
+
+<div class="container-fluid">
+    <br><br>
+    <form method="POST" action="transact">{% csrf_token %}
+    <table>
+      <caption><b><h3>All Stocks</h3></b></caption>
+      <thead>
+        <tr>
+          <th scope="col"><b>Name</b></th>
+          <th scope="col"><b>Volume</b></th>
+        </tr>
+      </thead>
+      <tbody>
+
+       {% for stock in stockslist %}
+        <tr>
+          <th scope="row"><b>{{stock.stock.symbol}}</b></th>
+          <td><b>{{stock.volume}}</b></td>
+        </tr>
+       {% endfor %}
+      </tbody>
+    </table>
+</div>
+
 <footer class="row-footer">
     <div class="container-fluid">
         <div class="row"  style="font-size: medium">
             <div class="col-xs-6 col-sm-5">
                 <h4>Contact us:</h4>
                 <address>
-                    <i class="fa fa-date fa-lg"></i> : (91)-(022)-26707440<br>
+                    <i class="fa fa-phone fa-lg"></i> : (91)-(022)-26707440<br>
                     <i class="fa fa-fax fa-lg"></i> : 26287250<br>
                     <i class="fa fa-envelope fa-lg"></i> :
                     <a href="#">stockmarket_query.net</a>
@@ -107,7 +116,7 @@
         </div>
     </div>
 </footer>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script> -->
 </body>
 </html>
