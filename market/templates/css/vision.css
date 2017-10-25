@@ -1,0 +1,84 @@
+svg {
+    display: block;
+    font: 8em 'Montserrat';
+    width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.text-copy {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: 6% 29%;
+    stroke-width: 5px;
+    stroke-dashoffset: 0%;
+    animation: stroke-offset 5.5s infinite linear;
+}
+
+.text-copy:nth-child(1){
+    stroke: #38005E  ;
+    animation-delay: -1;
+}
+
+.text-copy:nth-child(2){
+    stroke: #9700FF   ;
+    animation-delay: -2s;
+}
+
+.text-copy:nth-child(3){
+    stroke: #9543CD  ;
+    animation-delay: -3s;
+}
+
+.text-copy:nth-child(4){
+    stroke: #BF80EA  ;
+    animation-delay: -4s;
+}
+
+.text-copy:nth-child(5){
+    stroke: white;
+    animation-delay: -5s;
+}
+
+@keyframes stroke-offset{
+    100% {stroke-dashoffset: -35%;}
+}
+
+p{
+    font-size: x-large;
+    text-align: center;
+}
+ul{
+    font-size: x-large;
+}
+
+.film{
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#s2{
+    background-image: url("../pics/adbms/stock.jpg");
+    min-height: 500px;
+}
+
+.space{
+    min-height: 500px;
+}
+
+#p1{
+    background-image: url("../pics/adbms/8.png");
+    min-height: 500px;
+}
+
+#p2{
+    background-image: url("../pics/adbms/9.jpg");
+    min-height: 500px;
+}
+
+#p3{
+    background-image: url("../pics/adbms/10.jpg");
+    min-height: 500px;
+}
