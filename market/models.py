@@ -20,4 +20,8 @@ class Portfolio(models.Model):
     volume = models.IntegerField()
     boughtat = models.IntegerField()
     
+class Customers(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    balance = models.IntegerField()
+    
 # Create your models here.

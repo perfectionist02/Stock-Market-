@@ -1,3 +1,18 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
+from .models import Stock
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+
+def homepage(request):
+    return render(request,'market/homepage.html')
+
+def stocks(request):
+    stockslist = Stock.objects.orderby('symbol')
+    context = {'stockslist':stockslist}
+    return render(request, 'market/stocks.html',context}
+    
+    
 # Create your views here.
