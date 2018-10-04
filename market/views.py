@@ -11,7 +11,10 @@ def homepage(request):
     return render(request,'market/main.html')
 
 def stocks(request):
-    stockslist = Stock.objects.all()
+    #stockslist = Stock.objects.all()
+    name = request.GET['name']
+    print(name)
+    stockslist = Stock.objects.filter(symbol__startswith=name)
     context = {'stockslist':stockslist}
     return render(request, 'market/stock.html',context)
     

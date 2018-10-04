@@ -12,6 +12,7 @@ class Stock(models.Model):
     high_price = models.FloatField()
     low_price = models.FloatField()
     volume = models.IntegerField()
+    logo = models.ImageField(null=True)
     
     def __str__(self):
         return self.symbol
